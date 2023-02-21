@@ -29,7 +29,7 @@ void main() async{
 }
 
 void callbackDispatcher() {
-  Workmanager().executeTask((task, inputData) {
+  Workmanager().executeTask((task, inputData) async {
 
     // initialise the plugin of flutterlocalnotifications.
     FlutterLocalNotificationsPlugin flip = FlutterLocalNotificationsPlugin();
@@ -42,7 +42,7 @@ void callbackDispatcher() {
     // initialise settings for both Android and iOS device.
     var settings = InitializationSettings(android: android, iOS: IOS);
     flip.initialize(settings);
-    _showNotificationWithDefaultSound(flip, inputData!["payload"]);
+    await _showNotificationWithDefaultSound(flip, inputData!["payload"]);
     return Future.value(true);
   });
 }
